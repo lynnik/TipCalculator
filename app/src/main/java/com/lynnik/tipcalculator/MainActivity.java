@@ -2,6 +2,8 @@ package com.lynnik.tipcalculator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -36,10 +38,10 @@ public class MainActivity extends Activity {
     totalTextView.setText(currencyFormat.format(0));
 
     EditText amountEditText = (EditText) findViewById(R.id.amountEditText);
-    amountEditText.addTextChangedListener();
+    amountEditText.addTextChangedListener(amountEditTextWatcher);
 
     SeekBar percentSeekBar = (SeekBar) findViewById(R.id.percentSeekBar);
-    percentSeekBar.setOnSeekBarChangeListener();
+    percentSeekBar.setOnSeekBarChangeListener(seekBarListener);
   }
 
   private void calculate() {
@@ -51,4 +53,45 @@ public class MainActivity extends Activity {
     tipTextView.setText(currencyFormat.format(tip));
     totalTextView.setText(currencyFormat.format(total));
   }
+
+  private final SeekBar.OnSeekBarChangeListener seekBarListener =
+      new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(
+            SeekBar seekBar, int progress, boolean b) {
+          percent = progress / 100.0;
+          calculate();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+      };
+
+  private final TextWatcher amountEditTextWatcher = new TextWatcher() {
+    @Override
+    public void beforeTextChanged(
+        CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(
+        CharSequence charSequence, int i, int i1, int i2) {
+      try {
+        billAmount = Double.parseDouble(charSequence.toString());
+        amountTextView.setText(currencyFormat.format(billAmount));
+      } catch (NumberFormatException e) {
+        amountTextView.setText("");
+        billAmount = 0.0;
+      }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+    }
+  };
 }
