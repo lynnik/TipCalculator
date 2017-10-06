@@ -9,7 +9,7 @@
   tools:context="com.lynnik.tipcalculator.MainActivity">
 
   <EditText
-    android:id="@+id/editText"
+    android:id="@+id/amountEditText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_column="0"
@@ -80,7 +80,7 @@
     android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
 
   <TextView
-    android:id="@+id/textView7"
+    android:id="@+id/totalTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="fill_horizontal"
