@@ -1,9 +1,24 @@
-package com.lynnik.tipcalculator;
+package com.lynnik.tipcalculator; 
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.NumberFormat;
+
+public class MainActivity extends Activity {
+
+  private static final NumberFormat currencyFormat =
+      NumberFormat.getCurrencyInstance();
+  private static final NumberFormat percentFormat =
+      NumberFormat.getPercentInstance();
+
+  private double billAmount = 0.0;
+  private double percent = 0.15;
+  private TextView amountTextView;
+  private TextView percentTextView;
+  private TextView tipTextView;
+  private TextView totalTextView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
