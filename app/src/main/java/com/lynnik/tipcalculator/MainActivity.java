@@ -41,4 +41,14 @@ public class MainActivity extends Activity {
     SeekBar percentSeekBar = (SeekBar) findViewById(R.id.percentSeekBar);
     percentSeekBar.setOnSeekBarChangeListener();
   }
+
+  private void calculate() {
+    percentTextView.setText(percentFormat.format(percent));
+
+    double tip = billAmount * percent;
+    double total = billAmount + tip;
+
+    tipTextView.setText(currencyFormat.format(tip));
+    totalTextView.setText(currencyFormat.format(total));
+  }
 }
